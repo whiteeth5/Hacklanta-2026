@@ -1,0 +1,39 @@
+/* Layout: app shell with a sidebar on desktop and a bottom bar on phones. Palettes are applied
+   at runtime by lib/palettes.ts; these Forest Green values are the first paint before script runs. */
+:root {
+  --bg:#f4f2ea; --surface:#fffefa; --surface-2:#e9e6da; --ink:#232824; --muted:#566057; --line:#d7d3c3;
+  --primary:#1f4d3a; --primary-ink:#fdfbf3; --primary-soft:#dde9dc; --secondary:#7f9d82; --secondary-soft:#e2eadb;
+  --ok:#1f6b3a; --ok-soft:#dcf0e1; --warn:#8f5400; --warn-soft:#fcedcb; --danger:#b42318; --danger-soft:#fde4e1;
+  --info:#2a5a86; --info-soft:#e1ecf6; --focus:#c46a00; --shadow:0 1px 2px rgba(20,24,30,.06),0 4px 16px rgba(20,24,30,.06);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#111814; --surface:#18221c; --surface-2:#213027; --ink:#e9e7dc; --muted:#a6b0a4; --line:#33433a;
+    --primary:#86c29c; --primary-ink:#0e1f16; --primary-soft:#203a2b; --secondary:#6f9476; --secondary-soft:#24362a;
+    --ok:#8fd6a3; --ok-soft:#173322; --warn:#f2b75a; --warn-soft:#3a2c12; --danger:#ff8d80; --danger-soft:#3f1b18;
+    --info:#9cc7ee; --info-soft:#182b3d; --focus:#f2b75a; --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; transition: background-color .25s ease; }
+h1, h2, h3 { text-wrap: balance; }
+*:focus-visible:not(.outline-none) { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 8px; }
+.skip-link { position:absolute; left:12px; top:-60px; z-index:100; background:var(--primary); color:var(--primary-ink); padding:10px 16px; border-radius:10px; font-weight:700; }
+.skip-link:focus { top: calc(env(safe-area-inset-top, 0px) + 12px); }
+.fade-in { animation: fade .25s ease-out; }
+@keyframes fade { from { opacity:.4; transform: translateY(4px); } to { opacity:1; transform:none; } }
+@keyframes pulse-ring { 0% { opacity:.9; r: 6; } 100% { opacity:0; r: 22; } }
+.pulse { animation: pulse-ring 1.6s ease-out infinite; }
+:root.reduce-motion *, :root.reduce-motion *::before, :root.reduce-motion *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+input[type="range"] { accent-color: var(--primary); }
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
