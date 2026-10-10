@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Home Base: household budget</title>
+  <meta name="description" content="A free, private household budget for bills, groceries, and subscriptions. Works offline and keeps your data on your phone.">
+  <meta name="theme-color" content="#2E6A4F" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111917" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Home Base">
+  <link rel="preload" href="fonts/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">Home <span>Base</span></div>
+      <div class="top-right">
+        <button class="install" id="installBtn" type="button" hidden>Install app</button>
+        <div class="savestate" id="saveState">Saved on this phone</div>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Budget sections">
+      <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+      <button role="tab" data-tab="monthly" aria-selected="false">Monthly bills</button>
+      <button role="tab" data-tab="yearly" aria-selected="false">Yearly bills</button>
+      <button role="tab" data-tab="grocery" aria-selected="false">Groceries</button>
+      <button role="tab" data-tab="subs" aria-selected="false">Subscriptions</button>
+    </nav>
+
+    <main id="main">
+      <noscript><p class="lede">Home Base needs JavaScript turned on to work.</p></noscript>
+    </main>
+  </div>
+
+  <input type="file" id="restoreFile" accept="application/json,.json" hidden>
+
+  <div id="toast" role="status" aria-live="polite">
+    <span id="toastMsg"></span>
+    <button id="toastBtn" type="button"></button>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
